@@ -35,3 +35,6 @@
     - mysql 모듈 사용 : npm install --save mysql
     - DB connection 모듈화 : src/config/db.ts
     - .env파일에 DB 접속 정보 저장하여 외부 노출 방지
+
+- view추가
+    - DB 데이터 출력 테스트

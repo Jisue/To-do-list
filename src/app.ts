@@ -2,18 +2,20 @@
 
 import express, {Request, Response, NextFunction} from 'express'
 import path from 'path'
-import {Routes} from './routes/list';
+import {indexRoutes} from './routes/index';
+import {listRoutes} from './routes/list';
 import dotenv from 'dotenv';
-import mysql from 'mysql';
 
 
 class App{
     public app : express.Application;
-    public route : Routes = new Routes();
+    public indexroute : indexRoutes = new indexRoutes();
+    public listroute : listRoutes = new listRoutes();
 
     constructor(){
         this.app = express();
-        this.route.routes(this.app);
+        this.indexroute.routes(this.app);
+        this.listroute.routes(this.app);
     }
 }
 
@@ -26,6 +28,9 @@ dotenv.config();
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'pug')
 app.set('port', process.env.PORT || 3000)
+
+app.use(express.static(path.join(__dirname, 'public')));
+app.use('/', app.route);
 
 app.listen(app.get('port'),()=>{
   console.log(app.get('port'),"번 포트에서 대기중입니다.");
