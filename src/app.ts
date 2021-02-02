@@ -4,6 +4,8 @@ import express, {Request, Response, NextFunction} from 'express'
 import path from 'path'
 import {Routes} from './routes/list';
 import dotenv from 'dotenv';
+import mysql from 'mysql';
+
 
 class App{
     public app : express.Application;

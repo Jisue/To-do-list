@@ -11,7 +11,10 @@
 - npm start : app.js 실행
 
 
-# 개발 진행
+
+
+# 내역
+
 
 ## 2021-02-01
 
@@ -25,4 +28,10 @@
 - dotenv 모듈 추가
     - 설치 : npm install --save dotenv
     - .env파일의 환경변수 사용 ( gitignore에 추가 )
-    - DB 접속 정보, PORT 저장
+    - PORT 저장
+
+- DB 연동
+    - Node.js와 MySQL 연동
+    - mysql 모듈 사용 : npm install --save mysql
+    - DB connection 모듈화 : src/config/db.ts
+    - .env파일에 DB 접속 정보 저장하여 외부 노출 방지

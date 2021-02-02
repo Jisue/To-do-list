@@ -1,5 +1,5 @@
 import {Request, Response, NextFunction} from 'express';
-import dotenv from 'dotenv';
+import {DB} from '../config/db';
 
 export class Routes {       
     public routes(router:any): void {          
@@ -12,5 +12,9 @@ export class Routes {
     }
 }
 
-//.env 환경변수 로드
-dotenv.config();
+const connection = new DB().connection;
+
+connection.query("SELECT * FROM user_list", function (err, result, fields) {
+    if (err) throw err;
+    console.log(result);
+});
