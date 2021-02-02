@@ -11,14 +11,14 @@
 - npm start : app.js 실행
 
 
-### 개발 진행
+# 개발 진행
 
-# 2021-02-01
+## 2021-02-01
 
 - Express + TS 기본 세팅
 - gitignore 설정 : node_modules, dist
 
-# 2021-02-02
+## 2021-02-02
 
 - tsconfig.json, package.json 설정
 
