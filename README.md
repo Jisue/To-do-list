@@ -11,3 +11,6 @@
 - npm run dev
 - npm run build
 - npm start
+
+- .env 파일 추가
+    - DB 정보 저장
