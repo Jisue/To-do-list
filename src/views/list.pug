@@ -5,7 +5,7 @@ head
   meta(name='description', content='')
   meta(name='author', content='Mark Otto, Jacob Thornton, and Bootstrap contributors')
   meta(name='generator', content='Hugo 0.79.0')
-  title Album example &middot; Bootstrap v5.0
+  title To-Do-List &middot; Bootstrap v5.0
   link(rel='canonical', href='https://getbootstrap.com/docs/5.0/examples/album/')
   // Bootstrap core CSS
   link(href='../assets/dist/css/bootstrap.min.css', rel='stylesheet')
@@ -27,7 +27,7 @@ header
     .container
       .row
         .col-sm-8.col-md-7.py-4
-          h4.text-white About
+          h4.text-white(name="ab") About
           p.text-muted Make your own To-do-list
   .navbar.navbar-dark.bg-dark.shadow-sm
     .container
@@ -41,8 +41,16 @@ main
       .col-lg-6.col-md-8.mx-auto
         h1.fw-light My List
         p.lead.text-muted &#xC544;&#xB798; &#xBC84;&#xD2BC;&#xC744; &#xD074;&#xB9AD;&#xD574;&#xC11C; &#xBAA9;&#xB85D;&#xC744; &#xCD94;&#xAC00;&#xD558;&#xC138;&#xC694;.
-        p
-          a.btn.btn-primary.my-2(href='#') Add
+        // START 할일 등록
+        form(action='/' method='post' enctype='multipart/form-data')
+          input.form-control(type='text', placeholder='제목', name='list_name')
+          br
+          input.form-control(type='date', placeholder='기한', name='list_date')
+          br
+          input.form-control(type='text', placeholder='내용', name='list_memo')
+          br
+          input.btn.btn-primary(type='submit', value="Add")
+
   .album.py-5.bg-light
     .container
       .row.row-cols-1.row-cols-sm-2.row-cols-md-3.g-3
