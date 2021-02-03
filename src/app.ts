@@ -23,7 +23,7 @@ app.set('view engine', 'pug')
 app.set('port', process.env.PORT || 3000)
 
 app.use(express.static(path.join(__dirname, 'public')));
-// app.use(express.urlencoded( {extended : true } ));
+app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 const listroute : listRoutes = new listRoutes();

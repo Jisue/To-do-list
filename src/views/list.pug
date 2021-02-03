@@ -27,7 +27,7 @@ header
     .container
       .row
         .col-sm-8.col-md-7.py-4
-          h4.text-white(name='ab') About
+          h4.text-white About
           p.text-muted Make your own To-do-list
   .navbar.navbar-dark.bg-dark.shadow-sm
     .container
@@ -42,7 +42,7 @@ main
         h1.fw-light My List
         p.lead.text-muted &#xC544;&#xB798; &#xBC84;&#xD2BC;&#xC744; &#xD074;&#xB9AD;&#xD574;&#xC11C; &#xBAA9;&#xB85D;&#xC744; &#xCD94;&#xAC00;&#xD558;&#xC138;&#xC694;.
         // START 할일 등록
-        form(action='/' method='post' enctype='multipart/form-data')
+        form(action='/' method='post' )
           input.form-control(type='text', placeholder='제목', name='list_name')
           br
           input.form-control(type='date', placeholder='기한', name='list_date')

@@ -19,10 +19,11 @@ export class listRoutes {
 
         router.route('/').post((req: Request, res: Response) => {
 
-            // connection.query(
-            //     "INSERT INTO user_list(list_name, list_dday, list_memo) VALUES('${request.body.list_name}', '${request.body.list_date}','${request.body.list_memo}');", function (err, result, fields) {
-            //     if (err) throw err;              
-            // });
+            connection.query(`INSERT INTO user_list(list_name, list_dday, list_memo) 
+            VALUES('${req.body.list_name}','${req.body.list_date}','${req.body.list_memo}')`
+            , function (err, result, fields) {
+                if (err) throw err;              
+            });
             
             connection.query("SELECT * FROM user_list", function (err, result) {
                 if (err) throw err;
@@ -30,9 +31,7 @@ export class listRoutes {
                 res.render('list',{
                     list : result
                 });        
-                        
             });
-            console.log(req.body);
         })
     }
 }

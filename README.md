@@ -34,8 +34,34 @@
     - DB connection 모듈화 : src/config/db.ts
     - .env파일에 DB 접속 정보 저장하여 외부 노출 방지
 
+```
+export class DB {       
+    public connection = mysql.createConnection({
+        host: process.env.DB_HOST,
+        user: process.env.DB_USER,
+        password: process.env.DB_PASSWORD,
+        database: process.env.DB_DATABASE,
+    })
+}
+
+```
+
 - view추가
     - bootstrap을 이용해 간단한 UI 추가
     - DB 데이터 출력 테스트
 
 ## 2021-02-03
+
+- To-Do목록 불러오기 구현
+
+- POST시 req.body값이 {}로 넘어온 문제 해결
+    - <form enctype = "multipart/form-data"> 는 파일이나 이미지를 서버로 전송할 때 사용
+    - multer 미들웨어를 사용해야함
+    - 파일은 전송하지 않으므로, enctype 요소를 제거하고 app.ts에 코드를 추가함
+
+```
+app.use(express.urlencoded({ extended: false }));
+
+```
+
+- To-Do목록에 새로운 할일 추가 기능 구현
