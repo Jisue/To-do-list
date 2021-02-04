@@ -70,3 +70,9 @@ app.use(express.urlencoded({ extended: false }));
 - 삭제 기능 구현
     - delete 버튼 클릭시 DB에거 논리적으로 제거됨 
     - ( on요소가 0이 됨 )
+- Date 생성자를 이용하여 오늘 할일 구분
+
+```
+let newDate = new Date();
+let time = newDate.toJSON().slice(0,10);
+```

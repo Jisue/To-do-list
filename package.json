@@ -33,6 +33,7 @@
   },
   "dependencies": {
     "@types/body-parser": "^1.19.0",
+    "@types/date-utils": "^1.2.0",
     "body-parser": "^1.19.0",
     "date-utils": "^1.2.21",
     "dotenv": "^8.2.0",
