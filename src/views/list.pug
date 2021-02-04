@@ -41,32 +41,51 @@ main
       .col-lg-6.col-md-8.mx-auto
         h1.fw-light My List
         p.lead.text-muted &#xC544;&#xB798; &#xBC84;&#xD2BC;&#xC744; &#xD074;&#xB9AD;&#xD574;&#xC11C; &#xBAA9;&#xB85D;&#xC744; &#xCD94;&#xAC00;&#xD558;&#xC138;&#xC694;.
-        // START 할일 등록
-        form(action='/' method='post' )
-          input.form-control(type='text', placeholder='제목', name='list_name')
+        // 할일 등록
+        form(action='/add' method='post')
+          input.name.form-control(type='text', placeholder='제목', name='list_name')
           br
           input.form-control(type='date', placeholder='기한', name='list_date')
           br
           input.form-control(type='text', placeholder='내용', name='list_memo')
           br
-          input.btn.btn-primary(type='submit', value="Add")
+          input.btn.btn-primary(type='submit', value="Add" ,name='add_btn')
 
   .album.py-5.bg-light
     .container
       .row.row-cols-1.row-cols-sm-2.row-cols-md-3.g-3
 
         -for(let i = 0 ; i < list.length; i++)
+          if list[i].list_on != 0
             .col
               .card.shadow-sm
                 .card-body
-                  h2 #{list[i].list_name}
+                  h3 #{list[i].list_name}
+                  small.text-muted D-Day : #{list[i].list_dday}
+                  br
                   br
                   p.card-text #{list[i].list_memo}
                   br
                   .d-flex.justify-content-between.align-items-center
                     .btn-group
-                      button.btn.btn-sm.btn-outline-secondary(type='button') Edit
-                      button.btn.btn-sm.btn-outline-secondary(type='button') Delete
-                    small.text-muted D-Day
+                      // 삭제
+                      //- button.btn.btn-sm.btn-outline-secondary(type='button', onclick="javascript:send_name('"+list[i].list_name+"')") Edit
+                      button.btn.btn-sm.btn-outline-secondary(type='button', onclick="javascript:send_name('"+list[i].list_name+"')") Delete
+                    small.text-muted #{list[i].list_status}
 footer.text-muted.py-5
 script(src='../assets/dist/js/bootstrap.bundle.min.js')
+
+// 삭제 데이터 전송
+script.
+  function send_name(namedata) {
+    var form = document.createElement("form");
+    form.setAttribute("method", "post");
+    form.setAttribute("action", "/delete");
+    var post = document.createElement("input");
+    post.setAttribute("type", "hidden");
+    post.setAttribute("name", "delete_name");
+    post.setAttribute("value", namedata);
+    form.appendChild(post);
+    document.body.appendChild(form);
+    form.submit();
+  }

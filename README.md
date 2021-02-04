@@ -43,7 +43,6 @@ export class DB {
         database: process.env.DB_DATABASE,
     })
 }
-
 ```
 
 - view추가
@@ -55,13 +54,19 @@ export class DB {
 - To-Do목록 불러오기 구현
 
 - POST시 req.body값이 {}로 넘어온 문제 해결
-    - <form enctype = "multipart/form-data"> 는 파일이나 이미지를 서버로 전송할 때 사용
+    - form태그의 enctype = "multipart/form-data" 는 파일이나 이미지를 서버로 전송할 때 사용
     - multer 미들웨어를 사용해야함
     - 파일은 전송하지 않으므로, enctype 요소를 제거하고 app.ts에 코드를 추가함
 
 ```
 app.use(express.urlencoded({ extended: false }));
-
 ```
 
 - To-Do목록에 새로운 할일 추가 기능 구현
+    - add 버튼 클릭시 DB에 새로운 메모 저장
+
+## 2021-02-04
+
+- 삭제 기능 구현
+    - delete 버튼 클릭시 DB에거 논리적으로 제거됨 
+    - ( on요소가 0이 됨 )
