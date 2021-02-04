@@ -1,0 +1,40 @@
+doctype html
+head
+  meta(charset='utf-8')
+  meta(name='viewport', content='width=device-width, initial-scale=1')
+  meta(name='description', content='')
+  meta(name='author', content='Mark Otto, Jacob Thornton, and Bootstrap contributors')
+  meta(name='generator', content='Hugo 0.79.0')
+  title To-Do-List &middot; Bootstrap v5.0
+  link(rel='canonical', href='https://getbootstrap.com/docs/5.0/examples/album/')
+  // Bootstrap core CSS
+  link(href='../assets/dist/css/bootstrap.min.css', rel='stylesheet')
+  style.
+    .bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    }
+    @media (min-width: 768px) {
+    .bd-placeholder-img-lg {
+    font-size: 3.5rem;
+    }
+    }
+main
+  section.py-5.text-center.container
+    .row.py-lg-5
+      .col-lg-6.col-md-8.mx-auto
+        h1.fw-light #{list[0].list_name}
+        p.lead.text-muted 수정할 내역을 입력하세요.
+        // 할일 등록
+        form(action='/complete' method='post')
+          input(type='hidden', value = list[0].list_index, name='list_index')
+          input.name.form-control(type='text', placeholder='제목', name='list_name')
+          br
+          input.form-control(type='date', placeholder='기한', name='list_date')
+          br
+          input.form-control(type='text', placeholder='내용', name='list_memo')
+          br
+          input.btn.btn-primary(type='submit', value="Edit" ,name='edit_btn')

@@ -13,7 +13,6 @@ export class listRoutes {
             let newDate = new Date();
             let time = newDate.toJSON().slice(0,10);
             console.log(time);
-            
 
             connection.query("SELECT * FROM user_list", function (err, result) {
                 if (err) throw err;
@@ -72,27 +71,5 @@ export class listRoutes {
                 });        
             });
         })
-
-
-        //목록 수정
-        router.route('/edit').post((req: Request, res: Response) => {
-
-            // connection.query(`INSERT INTO user_list(list_name, list_dday, list_memo) 
-            // VALUES('${req.body.list_name}','${req.body.list_date}','${req.body.list_memo}')`
-            // , function (err, result, fields) {
-            //     if (err) throw err;              
-            // });
-            
-            console.log(req.body);
-
-            connection.query("SELECT * FROM user_list", function (err, result) {
-                if (err) throw err;
-                //console.log(result);
-                res.render('list',{
-                    list : result
-                });        
-            });
-        })
-
     }
 }

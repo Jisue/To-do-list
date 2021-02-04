@@ -1,6 +1,7 @@
 import express from 'express'
 import path from 'path'
 import {listRoutes} from './routes/list';
+import {editRoutes} from './routes/edit';
 import dotenv from 'dotenv';
 
 
@@ -28,6 +29,10 @@ app.use(express.json());
 
 const listroute : listRoutes = new listRoutes();
 listroute.routes(app);
+
+const editroute : editRoutes = new editRoutes();
+editroute.routes(app);
+
 
 app.listen(app.get('port'),()=>{
   console.log(app.get('port'),"번 포트에서 대기중입니다.");
