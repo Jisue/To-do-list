@@ -76,3 +76,10 @@ app.use(express.urlencoded({ extended: false }));
 let newDate = new Date();
 let time = newDate.toJSON().slice(0,10);
 ```
+
+
+
+### ing
+- 수정 기능
+- Done, Fail 변경
+- 목록 이름 중복 처리
