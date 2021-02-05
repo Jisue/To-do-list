@@ -98,7 +98,7 @@ export class listRoutes {
         })
 
 
-        //목록 수정
+        //목록 완료
         router.route('/done').post((req: Request, res: Response) => {
 
             let newDate:Date = new Date();
