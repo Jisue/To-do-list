@@ -12,7 +12,7 @@ export class editRoutes {
         //목록 수정
         router.route('/edit').post((req: Request, res: Response) => {
             
-            let edit_name = req.body.edit_name;
+            let edit_name:JSON = req.body.edit_name;
             console.log(edit_name);
 
             connection.query(`SELECT * FROM user_list WHERE list_name = '${req.body.edit_name}'`, function (err, result) {
@@ -26,8 +26,7 @@ export class editRoutes {
 
         router.route('/complete').post((req: Request, res: Response) => {    
             
-            console.log("수정 포스트");
-            let edit_name = req.body;
+            let edit_name:JSON = req.body;
             console.log(edit_name);
 
             connection.query( ` 
@@ -36,9 +35,9 @@ export class editRoutes {
                 WHERE list_index = '${req.body.list_index}'`
             , function (err, result) {
                 if (err) throw err;
-     
+                
             });
-    
+            console.log("목록 수정됨");
             res.render('complete');                
         })
 

@@ -85,6 +85,7 @@ export class listRoutes {
             , function (err, result, fields) {
                 if (err) throw err;              
             });
+            console.log("목록 삭제됨");
             
             connection.query("SELECT * FROM user_list", function (err, result) {
                 if (err) throw err;
@@ -113,6 +114,8 @@ export class listRoutes {
             , function (err, result, fields) {
                 if (err) throw err;              
             });
+
+            console.log("완료 처리됨");
 
             connection.query("SELECT * FROM user_list", function (err, result) {
                 if (err) throw err;
