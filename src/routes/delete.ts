@@ -13,17 +13,17 @@ export class deleteRoutes {
             let newDate:Date = new Date();
             let time:String = newDate.toJSON().slice(0,10);
 
-            let delete_name:JSON = req.body.delete_name;
-            console.log(delete_name);
+            let delete_index:JSON = req.body.delete_index;
+            console.log(delete_index);
             
             connection.query(`
                 UPDATE user_list
                 SET list_on = 0
-                WHERE list_name = '${delete_name}';`
+                WHERE list_index = '${delete_index}';`
             , function (err, result, fields) {
                 if (err) throw err;              
             });
-            console.log("목록 삭제됨");
+            console.log("휴지통이로 이동됨");
             
             connection.query("SELECT * FROM user_list", function (err, result) {
                 if (err) throw err;

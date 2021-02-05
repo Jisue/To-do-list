@@ -12,10 +12,10 @@ export class editRoutes {
         //목록 수정
         router.route('/edit').post((req: Request, res: Response) => {
             
-            let edit_name:JSON = req.body.edit_name;
-            console.log(edit_name);
+            let edit_index:JSON = req.body.edit_index;
+            console.log(edit_index);
             
-            connection.query(`SELECT * FROM user_list WHERE list_name = '${req.body.edit_name}'`, function (err, result) {
+            connection.query(`SELECT * FROM user_list WHERE list_index = '${req.body.edit_index}'`, function (err, result) {
                 if (err) throw err;
                 console.log(result);
                 let time:String = result[0].list_dday;

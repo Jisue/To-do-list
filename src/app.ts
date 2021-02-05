@@ -6,6 +6,7 @@ import {completeRoutes} from './routes/complete';
 import {addRoutes} from './routes/add';
 import {deleteRoutes} from './routes/delete';
 import {doneRoutes} from './routes/done';
+import {trashRoutes} from './routes/trash';
 import dotenv from 'dotenv';
 
 
@@ -18,6 +19,7 @@ class App{
   private addroute : addRoutes = new addRoutes();
   private deleteroute : deleteRoutes = new deleteRoutes();
   private doneroutes : doneRoutes = new doneRoutes();
+  private trashroutes : trashRoutes = new trashRoutes();
 
 
   constructor(){
@@ -30,6 +32,7 @@ class App{
     this.addroute.routes(this.app); 
     this.deleteroute.routes(this.app); 
     this.doneroutes.routes(this.app); 
+    this.trashroutes.routes(this.app); 
   }
 
 }

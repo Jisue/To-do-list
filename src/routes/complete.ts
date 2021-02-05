@@ -11,9 +11,6 @@ export class completeRoutes {
 
         router.route('/complete').post((req: Request, res: Response) => {    
             
-            let edit_name:JSON = req.body;
-            console.log(edit_name);
-
             connection.query( ` 
                 UPDATE user_list
                 SET list_name = '${req.body.list_name}', list_dday = '${req.body.list_date}', list_memo = '${req.body.list_memo}'

@@ -42,14 +42,15 @@ main
         h1.fw-light My List
         p.lead.text-muted &#xC544;&#xB798; &#xBC84;&#xD2BC;&#xC744; &#xD074;&#xB9AD;&#xD574;&#xC11C; &#xBAA9;&#xB85D;&#xC744; &#xCD94;&#xAC00;&#xD558;&#xC138;&#xC694;.
         // 할일 등록
-        form(action='/add' method='post')
+        form#add_form(action='/add' method='post')
+          //onsubmit='return confirm("정말 추가하시겠습니까?")'
           input.name.form-control(type='text', placeholder='제목', name='list_name')
           br
-          input.form-control(type='date', placeholder='기한', name='list_date')
+          input#add_date.form-control(type='date', placeholder='기한', name='list_date')
           br
           input.form-control(type='text', placeholder='내용', name='list_memo')
           br
-          input.btn.btn-primary(type='submit', value="Add" ,name='add_btn')
+          button.btn.btn-primary(type='button', onclick="javascript:add_btn()") Add
 
   h2(style = 'margin : 5%') 오늘 할일 : #{time}
   .album.py-5.bg-light
@@ -69,11 +70,11 @@ main
                   .d-flex.justify-content-between.align-items-center
                     .btn-group
                       //수정
-                      button.btn.btn-sm.btn-outline-secondary(type='button', onclick="javascript:edit_name('"+list[i].list_name+"')") Edit
+                      button.btn.btn-sm.btn-outline-secondary(type='button', onclick="javascript:edit_name('"+list[i].list_index+"')") Edit
                       // 삭제
-                      button.btn.btn-sm.btn-outline-secondary(type='button', onclick="javascript:send_name('"+list[i].list_name+"')") Delete
+                      button.btn.btn-sm.btn-outline-secondary(type='button', onclick="javascript:send_name('"+list[i].list_index+"')") Delete
                     small.text-muted #{list[i].list_status} &nbsp;&nbsp;
-                      button.btn.btn-sm.btn-outline-secondary(type='button', onclick="javascript:done_name('"+list[i].list_name+"')") &nbsp;&nbsp;&nbsp;
+                      button.btn.btn-sm.btn-outline-secondary(type='button', onclick="javascript:done_name('"+list[i].list_index+"')") &nbsp;&nbsp;&nbsp;
   br
   h2(style = 'margin : 5%') 남은 할일
   .album.py-5.bg-light
@@ -94,11 +95,11 @@ main
                   .d-flex.justify-content-between.align-items-center
                     .btn-group
                       //수정
-                      button.btn.btn-sm.btn-outline-secondary(type='button', onclick="javascript:edit_name('"+list[i].list_name+"')") Edit
+                      button.btn.btn-sm.btn-outline-secondary(type='button', onclick="javascript:edit_name('"+list[i].list_index+"')") Edit
                       // 삭제
-                      button.btn.btn-sm.btn-outline-secondary(type='button', onclick="javascript:send_name('"+list[i].list_name+"')") Delete
+                      button.btn.btn-sm.btn-outline-secondary(type='button', onclick="javascript:send_name('"+list[i].list_index+"')") Delete
                     small.text-muted #{list[i].list_status} &nbsp;&nbsp;
-                      button.btn.btn-sm.btn-outline-secondary(type='button', onclick="javascript:done_name('"+list[i].list_name+"')") &nbsp;&nbsp;&nbsp;
+                      button.btn.btn-sm.btn-outline-secondary(type='button', onclick="javascript:done_name('"+list[i].list_index+"')") &nbsp;&nbsp;&nbsp;
   br
   h2(style = 'margin : 5%') 완료
   .album.py-5.bg-light
@@ -119,11 +120,11 @@ main
                   .d-flex.justify-content-between.align-items-center
                     .btn-group
                       //수정
-                      button.btn.btn-sm.btn-outline-secondary(type='button', onclick="javascript:edit_name('"+list[i].list_name+"')") Edit
+                      button.btn.btn-sm.btn-outline-secondary(type='button', onclick="javascript:edit_name('"+list[i].list_index+"')") Edit
                       // 삭제
-                      button.btn.btn-sm.btn-outline-secondary(type='button', onclick="javascript:send_name('"+list[i].list_name+"')") Delete
+                      button.btn.btn-sm.btn-outline-secondary(type='button', onclick="javascript:send_name('"+list[i].list_index+"')") Delete
                     small.text-muted #{list[i].list_status} &nbsp;&nbsp;
-                      button.btn.btn-sm.btn-outline-secondary(type='button', onclick="javascript:done_name('"+list[i].list_name+"')") &nbsp;&nbsp;&nbsp;
+                      button.btn.btn-sm.btn-outline-secondary(type='button', onclick="javascript:done_name('"+list[i].list_index+"')") &nbsp;&nbsp;&nbsp;
 
   br
   h2(style = 'margin : 5%') 완료 실패
@@ -145,11 +146,11 @@ main
                   .d-flex.justify-content-between.align-items-center
                     .btn-group
                       //수정
-                      button.btn.btn-sm.btn-outline-secondary(type='button', onclick="javascript:edit_name('"+list[i].list_name+"')") Edit
+                      button.btn.btn-sm.btn-outline-secondary(type='button', onclick="javascript:edit_name('"+list[i].list_index+"')") Edit
                       // 삭제
-                      button.btn.btn-sm.btn-outline-secondary(type='button', onclick="javascript:send_name('"+list[i].list_name+"')") Delete
+                      button.btn.btn-sm.btn-outline-secondary(type='button', onclick="javascript:send_name('"+list[i].list_index+"')") Delete
                     small.text-muted #{list[i].list_status} &nbsp;&nbsp;
-                      button.btn.btn-sm.btn-outline-secondary(type='button', onclick="javascript:done_name('"+list[i].list_name+"')") &nbsp;&nbsp;&nbsp;
+                      button.btn.btn-sm.btn-outline-secondary(type='button', onclick="javascript:done_name('"+list[i].list_index+"')") &nbsp;&nbsp;&nbsp;
 
 footer.text-muted.py-5
 script(src='../assets/dist/js/bootstrap.bundle.min.js')
@@ -157,29 +158,37 @@ script(src='../assets/dist/js/bootstrap.bundle.min.js')
 // 삭제 데이터 전송
 script.
   function send_name(namedata) {
-    var form = document.createElement("form");
-    form.setAttribute("method", "post");
-    form.setAttribute("action", "/delete");
-    var post = document.createElement("input");
-    post.setAttribute("type", "hidden");
-    post.setAttribute("name", "delete_name");
-    post.setAttribute("value", namedata);
-    form.appendChild(post);
-    document.body.appendChild(form);
-    form.submit();
+    if (confirm("정말 삭제하시겠습니까??") === true){    //확인
+      var form = document.createElement("form");
+      form.setAttribute("method", "post");
+      form.setAttribute("action", "/delete");
+      var post = document.createElement("input");
+      post.setAttribute("type", "hidden");
+      post.setAttribute("name", "delete_index");
+      post.setAttribute("value", namedata);
+      form.appendChild(post);
+      document.body.appendChild(form);
+      form.submit();
+    }else{   //취소
+        return;
+    }
   }
 
   function done_name(namedata) {
-    var form = document.createElement("form");
-    form.setAttribute("method", "post");
-    form.setAttribute("action", "/done");
-    var post = document.createElement("input");
-    post.setAttribute("type", "hidden");
-    post.setAttribute("name", "done_name");
-    post.setAttribute("value", namedata);
-    form.appendChild(post);
-    document.body.appendChild(form);
-    form.submit();
+    if (confirm("정말 완료하겠습니까??") === true){    //확인
+      var form = document.createElement("form");
+      form.setAttribute("method", "post");
+      form.setAttribute("action", "/done");
+      var post = document.createElement("input");
+      post.setAttribute("type", "hidden");
+      post.setAttribute("name", "done_index");
+      post.setAttribute("value", namedata);
+      form.appendChild(post);
+      document.body.appendChild(form);
+      form.submit();
+    }else{   //취소
+        return;
+    }
   }
 
 
@@ -192,9 +201,26 @@ script.
     form.setAttribute("action", "/edit");
     var post = document.createElement("input");
     post.setAttribute("type", "hidden");
-    post.setAttribute("name", "edit_name");
+    post.setAttribute("name", "edit_index");
     post.setAttribute("value", namedata);
     form.appendChild(post);
     document.body.appendChild(form);
     form.submit();
+  }
+
+// add
+script.
+  function add_btn() {
+    if(confirm("정말 추가하겠습니까??") === true){
+      if(document.getElementById('add_date').value === ''){
+        alert("내용을 입력하세요!");
+        return;
+      }
+      else{
+        document.getElementById('add_form').submit();
+      }
+    }
+    else{
+      return;
+    }
   }

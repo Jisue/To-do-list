@@ -28,6 +28,7 @@ main
       .col-lg-6.col-md-8.mx-auto
         h1.fw-light My List
         p.lead.text-muted 수정할 내역을 입력하세요.
+        p.lead.text-muted 수정을 취소하려면 뒤로가기를 누르세요.
         // 할일 등록
         form(action='/complete' method='post')
           input(type='hidden', value = list[0].list_index, name='list_index')
@@ -37,4 +38,5 @@ main
           br
           input.form-control(type='text', placeholder=list[0].list_memo, name='list_memo')
           br
-          input.btn.btn-primary(type='submit', value="Edit" ,name='edit_btn')
+          input.btn.btn-primary(type='submit', value="Edit" ,name='edit_btn', style='margin-right:2%')
+          input.btn.btn-primary(type='button', value='Back', name='Back', style='margin-left:2%', onclick="location.href='/'")
