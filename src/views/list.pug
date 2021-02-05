@@ -56,7 +56,7 @@ main
     .container
       .row.row-cols-1.row-cols-sm-2.row-cols-md-3.g-3
         -for(let i = 0 ; i < list.length; i++)
-          if list[i].list_on !== 0 && list[i].list_dday === time
+          if list[i].list_on !== 0 && list[i].list_dday === time && list[i].list_status === 'Doing'
             .col
               .card.shadow-sm
                 .card-body
