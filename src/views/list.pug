@@ -35,13 +35,14 @@ header
       #navbarCollapse.collapse.navbar-collapse
         ul.navbar-nav.me-auto.mb-2.mb-md-0
           li.nav-item.active
-            a.nav-link(aria-current='page', href='#') Add
+            a.nav-link(aria-current='page', href='#Add') Add
           li.nav-item
-            a.nav-link(href='#') List
+            a.nav-link(href='#List') List
           li.nav-item
-            a.nav-link(href='#', tabindex='-1', aria-disabled='true') Delete
+            a.nav-link(href='/trash', tabindex='-1', aria-disabled='true') Delete
 
 main.list
+  br#Add
   section.py-5.text-center.container
     .row.py-lg-5
       .col-lg-6.col-md-8.mx-auto
@@ -58,6 +59,7 @@ main.list
           br
           button.btn.btn-primary(type='button', onclick="javascript:add_btn()") Add
 
+  br#List
   h2(style = 'margin : 5%') 오늘 할일 : #{time}
   .album.py-5.bg-light
     .container
@@ -157,14 +159,13 @@ main.list
                       button.btn.btn-sm.btn-outline-secondary(type='button', onclick="javascript:send_name('"+list[i].list_index+"')") Delete
                     small.text-muted #{list[i].list_status} &nbsp;&nbsp;
                       button.btn.btn-sm.btn-outline-secondary(type='button', onclick="javascript:done_name('"+list[i].list_index+"')") &nbsp;&nbsp;&nbsp;
-
 footer.text-muted.py-5
 script(src='../assets/dist/js/bootstrap.bundle.min.js')
 
 // 삭제 데이터 전송
 script.
   function send_name(namedata) {
-    if (confirm("정말 삭제하시겠습니까??") === true){    //확인
+    if (confirm("휴지통으로 이동됩니다.") === true){    //확인
       var form = document.createElement("form");
       form.setAttribute("method", "post");
       form.setAttribute("action", "/delete");

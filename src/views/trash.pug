@@ -1,0 +1,109 @@
+doctype html
+head
+  meta(charset='utf-8')
+  meta(name='viewport', content='width=device-width, initial-scale=1')
+  meta(name='description', content='')
+  meta(name='author', content='Mark Otto, Jacob Thornton, and Bootstrap contributors')
+  meta(name='generator', content='Hugo 0.79.0')
+  title To-Do-List &middot; Bootstrap v5.0
+  link(rel='canonical', href='https://getbootstrap.com/docs/5.0/examples/album/')
+  // Bootstrap core CSS
+  link(href='../assets/dist/css/bootstrap.min.css', rel='stylesheet')
+  style.
+    .bd-placeholder-img {
+      font-size: 1.125rem;
+      text-anchor: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      user-select: none;
+    }
+    @media (min-width: 768px) {
+      .bd-placeholder-img-lg {
+      font-size: 3.5rem;
+      }
+    }
+    .list {
+      margin-top: 10%;
+    }
+header
+  nav.navbar.navbar-expand-md.navbar-dark.fixed-top.bg-dark
+    .container
+      a.navbar-brand.d-flex.align-items-center(href='#')
+        strong To-Do-List
+      button.navbar-toggler(type='button', data-bs-toggle='collapse', data-bs-target='#navbarCollapse', aria-controls='navbarCollapse', aria-expanded='false', aria-label='Toggle navigation')
+        span.navbar-toggler-icon
+      #navbarCollapse.collapse.navbar-collapse
+        ul.navbar-nav.me-auto.mb-2.mb-md-0
+          li.nav-item.active
+            a.nav-link(aria-current='page', href='/#Add') Add
+          li.nav-item
+            a.nav-link(href='/#List') List
+          li.nav-item
+            a.nav-link(href='#Delete', tabindex='-1', aria-disabled='true') Delete
+
+main.list
+  br#Delete
+  h2(style = 'margin : 5%') 휴지통
+  .album.py-5.bg-light
+    .container
+      .row.row-cols-1.row-cols-sm-2.row-cols-md-3.g-3
+
+        -for(let i = 0 ; i < list.length; i++)
+          if list[i].list_on === 0
+            .col
+              .card.shadow-sm
+                .card-body
+                  h3 #{list[i].list_name}
+                  small.text-muted D-Day : #{list[i].list_dday}
+                  br
+                  br
+                  p.card-text #{list[i].list_memo}
+                  br
+                  .d-flex.justify-content-between.align-items-center
+                    .btn-group
+                      // 삭제
+                      button.btn.btn-sm.btn-outline-secondary(type='button', onclick="javascript:send_name('"+list[i].list_index+"')") Delete
+                      // 복원
+                      button.btn.btn-sm.btn-outline-secondary(type='button', onclick="javascript:rollback_name('"+list[i].list_index+"')") Rollback
+                    small.text-muted #{list[i].list_status} &nbsp;&nbsp;
+
+footer.text-muted.py-5
+script(src='../assets/dist/js/bootstrap.bundle.min.js')
+
+// 삭제 데이터 전송
+script.
+  function send_name(namedata) {
+    if (confirm("정말 삭제하시겠습니까??") === true){    //확인
+      var form = document.createElement("form");
+      form.setAttribute("method", "post");
+      form.setAttribute("action", "/trash");
+      var post = document.createElement("input");
+      post.setAttribute("type", "hidden");
+      post.setAttribute("name", "delete_index");
+      post.setAttribute("value", namedata);
+      form.appendChild(post);
+      document.body.appendChild(form);
+      form.submit();
+    }else{   //취소
+        return;
+    }
+  }
+
+// 데이터 복구
+script.
+  function rollback_name(namedata) {
+    if (confirm("정말 삭제하시겠습니까??") === true){    //확인
+      var form = document.createElement("form");
+      form.setAttribute("method", "post");
+      form.setAttribute("action", "/trash");
+      var post = document.createElement("input");
+      post.setAttribute("type", "hidden");
+      post.setAttribute("name", "rollback_index");
+      post.setAttribute("value", namedata);
+      form.appendChild(post);
+      document.body.appendChild(form);
+      form.submit();
+    }else{   //취소
+        return;
+    }
+  }
