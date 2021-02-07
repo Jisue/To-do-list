@@ -29,6 +29,9 @@
           font-size: 3.5rem;
         }
       }
+      .list {
+        margin-top: 10%;
+      }
     </style>
 
     
@@ -36,29 +39,32 @@
   <body>
     
 <header>
-  <div class="collapse bg-dark" id="navbarHeader">
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-8 col-md-7 py-4">
-          <h4 class="text-white">About</h4>
-          <p class="text-muted">Make your own To-do-list</p>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="navbar navbar-dark bg-dark shadow-sm">
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
     <div class="container">
       <a href="#" class="navbar-brand d-flex align-items-center">
         <strong>To-Do-List</strong>
       </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav me-auto mb-2 mb-md-0">
+          <li class="nav-item active">
+            <a class="nav-link" aria-current="page" href="#">Add</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">List</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Delete</a>
+          </li>
+        </ul>
+      </div>
     </div>
-  </div>
+  </nav>
 </header>
 
-<main>
+<main class ="list">
 
   <section class="py-5 text-center container">
     <div class="row py-lg-5">
@@ -98,6 +104,278 @@
       </div>
     </div>
   </div>
+
+  <div class="album py-5 bg-light">
+    <div class="container">
+
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        <div class="col">
+          <div class="card shadow-sm">
+            <div class="card-body">
+                <h2>New List</h2>
+                <br>
+            <p class="card-text">To-Do</p>
+            <br>
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary">Delete</button>
+                </div>
+                
+                <small class="text-muted">D-Day</small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="album py-5 bg-light">
+    <div class="container">
+
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        <div class="col">
+          <div class="card shadow-sm">
+            <div class="card-body">
+                <h2>New List</h2>
+                <br>
+            <p class="card-text">To-Do</p>
+            <br>
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary">Delete</button>
+                </div>
+                
+                <small class="text-muted">D-Day</small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="album py-5 bg-light">
+    <div class="container">
+
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        <div class="col">
+          <div class="card shadow-sm">
+            <div class="card-body">
+                <h2>New List</h2>
+                <br>
+            <p class="card-text">To-Do</p>
+            <br>
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary">Delete</button>
+                </div>
+                
+                <small class="text-muted">D-Day</small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="album py-5 bg-light">
+    <div class="container">
+
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        <div class="col">
+          <div class="card shadow-sm">
+            <div class="card-body">
+                <h2>New List</h2>
+                <br>
+            <p class="card-text">To-Do</p>
+            <br>
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary">Delete</button>
+                </div>
+                
+                <small class="text-muted">D-Day</small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="album py-5 bg-light">
+    <div class="container">
+
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        <div class="col">
+          <div class="card shadow-sm">
+            <div class="card-body">
+                <h2>New List</h2>
+                <br>
+            <p class="card-text">To-Do</p>
+            <br>
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary">Delete</button>
+                </div>
+                
+                <small class="text-muted">D-Day</small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="album py-5 bg-light">
+    <div class="container">
+
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        <div class="col">
+          <div class="card shadow-sm">
+            <div class="card-body">
+                <h2>New List</h2>
+                <br>
+            <p class="card-text">To-Do</p>
+            <br>
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary">Delete</button>
+                </div>
+                
+                <small class="text-muted">D-Day</small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="album py-5 bg-light">
+    <div class="container">
+
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        <div class="col">
+          <div class="card shadow-sm">
+            <div class="card-body">
+                <h2>New List</h2>
+                <br>
+            <p class="card-text">To-Do</p>
+            <br>
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary">Delete</button>
+                </div>
+                
+                <small class="text-muted">D-Day</small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="album py-5 bg-light">
+    <div class="container">
+
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        <div class="col">
+          <div class="card shadow-sm">
+            <div class="card-body">
+                <h2>New List</h2>
+                <br>
+            <p class="card-text">To-Do</p>
+            <br>
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary">Delete</button>
+                </div>
+                
+                <small class="text-muted">D-Day</small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="album py-5 bg-light">
+    <div class="container">
+
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        <div class="col">
+          <div class="card shadow-sm">
+            <div class="card-body">
+                <h2>New List</h2>
+                <br>
+            <p class="card-text">To-Do</p>
+            <br>
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary">Delete</button>
+                </div>
+                
+                <small class="text-muted">D-Day</small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="album py-5 bg-light">
+    <div class="container">
+
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        <div class="col">
+          <div class="card shadow-sm">
+            <div class="card-body">
+                <h2>New List</h2>
+                <br>
+            <p class="card-text">To-Do</p>
+            <br>
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary">Delete</button>
+                </div>
+                
+                <small class="text-muted">D-Day</small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
 
 </main>
 

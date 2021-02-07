@@ -11,31 +11,37 @@ head
   link(href='../assets/dist/css/bootstrap.min.css', rel='stylesheet')
   style.
     .bd-placeholder-img {
-    font-size: 1.125rem;
-    text-anchor: middle;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    user-select: none;
+      font-size: 1.125rem;
+      text-anchor: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      user-select: none;
     }
     @media (min-width: 768px) {
-    .bd-placeholder-img-lg {
-    font-size: 3.5rem;
+      .bd-placeholder-img-lg {
+      font-size: 3.5rem;
+      }
     }
+    .list {
+      margin-top: 10%;
     }
 header
-  #navbarHeader.collapse.bg-dark
-    .container
-      .row
-        .col-sm-8.col-md-7.py-4
-          h4.text-white About
-          p.text-muted Make your own To-do-list
-  .navbar.navbar-dark.bg-dark.shadow-sm
+  nav.navbar.navbar-expand-md.navbar-dark.fixed-top.bg-dark
     .container
       a.navbar-brand.d-flex.align-items-center(href='#')
         strong To-Do-List
-      button.navbar-toggler(type='button', data-bs-toggle='collapse', data-bs-target='#navbarHeader', aria-controls='navbarHeader', aria-expanded='false', aria-label='Toggle navigation')
+      button.navbar-toggler(type='button', data-bs-toggle='collapse', data-bs-target='#navbarCollapse', aria-controls='navbarCollapse', aria-expanded='false', aria-label='Toggle navigation')
         span.navbar-toggler-icon
-main
+      #navbarCollapse.collapse.navbar-collapse
+        ul.navbar-nav.me-auto.mb-2.mb-md-0
+          li.nav-item.active
+            a.nav-link(aria-current='page', href='#') Add
+          li.nav-item
+            a.nav-link(href='#') List
+          li.nav-item
+            a.nav-link(href='#', tabindex='-1', aria-disabled='true') Delete
+
+main.list
   section.py-5.text-center.container
     .row.py-lg-5
       .col-lg-6.col-md-8.mx-auto
