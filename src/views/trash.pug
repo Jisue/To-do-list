@@ -64,7 +64,7 @@ main.list
                       // 삭제
                       button.btn.btn-sm.btn-outline-secondary(type='button', onclick="javascript:send_name('"+list[i].list_index+"')") Delete
                       // 복원
-                      button.btn.btn-sm.btn-outline-secondary(type='button', onclick="javascript:rollback_name('"+list[i].list_index+"')") Rollback
+                      button.btn.btn-sm.btn-outline-secondary(type='button', onclick="javascript:rollback_name('"+list[i].list_index+"')") Restore
                     small.text-muted #{list[i].list_status} &nbsp;&nbsp;
 
 footer.text-muted.py-5
@@ -98,7 +98,7 @@ script.
       form.setAttribute("action", "/trash");
       var post = document.createElement("input");
       post.setAttribute("type", "hidden");
-      post.setAttribute("name", "rollback_index");
+      post.setAttribute("name", "restore_index");
       post.setAttribute("value", namedata);
       form.appendChild(post);
       document.body.appendChild(form);

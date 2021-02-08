@@ -23,7 +23,7 @@ export class deleteRoutes {
             , function (err, result, fields) {
                 if (err) throw err;              
             });
-            console.log("휴지통이로 이동됨");
+            console.log("휴지통으로 이동됨");
             
             connection.query("SELECT * FROM user_list", function (err, result) {
                 if (err) throw err;

@@ -34,15 +34,15 @@ export class trashRoutes {
 
             }
 
-            let rollback_index:JSON = req.body.rollback_index;
-            console.log(rollback_index);
+            let restore_index:JSON = req.body.restore_index;
+            console.log(restore_index);
             
-            if(rollback_index !== undefined)
+            if(restore_index !== undefined)
             {
                 connection.query(`
                     UPDATE user_list
                     SET list_on = 1
-                    WHERE list_index = '${rollback_index}';`
+                    WHERE list_index = '${restore_index}';`
                 , function (err, result, fields) {
                     if (err) throw err;              
                 });
