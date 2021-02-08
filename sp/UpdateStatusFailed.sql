@@ -1,5 +1,5 @@
 -- 완료 실패
--- CALL to_do_list.UpdateStatusFailed();
+-- CALL to_do_list.UpdateStatusFailed(0);
 
 DROP PROCEDURE IF EXISTS to_do_list.UpdateStatusFailed;
 

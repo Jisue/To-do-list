@@ -1,5 +1,5 @@
 -- 완료 처리
--- CALL to_do_list.UpdateStatusDone();
+-- CALL to_do_list.UpdateStatusDone(0);
 
 DROP PROCEDURE IF EXISTS to_do_list.UpdateStatusDone;
 

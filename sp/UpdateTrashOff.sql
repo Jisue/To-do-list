@@ -1,5 +1,5 @@
 -- 리스트 복원
--- CALL to_do_list.UpdateTrashOff();
+-- CALL to_do_list.UpdateTrashOff(0);
 
 DROP PROCEDURE IF EXISTS to_do_list.UpdateTrashOff;
 

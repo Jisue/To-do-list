@@ -1,5 +1,5 @@
 -- 휴지통으로 이동
--- CALL to_do_list.UpdateTrashOn();
+-- CALL to_do_list.UpdateTrashOn(0);
 
 DROP PROCEDURE IF EXISTS to_do_list.UpdateTrashOn;
 

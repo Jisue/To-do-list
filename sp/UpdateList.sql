@@ -1,5 +1,5 @@
 -- 목록 수정
--- CALL to_do_list.UpdateList();
+-- CALL to_do_list.UpdateList(0,'list','dday','memo');
 
 DROP PROCEDURE IF EXISTS to_do_list.UpdateList;
 

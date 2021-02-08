@@ -102,8 +102,23 @@ let time = newDate.toJSON().slice(0,10);
     - 복원 가능
 
 ## 2021-02-08
-- sp로 바꿔보기
-- sql 인젝션 공격 찾아보기..
+- Mysql SP(Stored Procedure)작성
+```
+DELIMITER //
+
+CREATE PROCEDURE `procedure`(
+    IN value INT,
+    ...
+)
+BEGIN
+    SELECT,INSERT,UPDATE,DELETE 
+    ...;
+END //
+
+DELIMITER ;
+
+```
+    - DELIMITER : 문법의 끝을 나타내는 역할, 구문 문자
 
 ## 보완할 내역들
 - api서버를 만들고 ( 디비를 분리 해서 )

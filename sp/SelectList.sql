@@ -1,5 +1,5 @@
 -- 인덱스 1 조회
--- CALL to_do_list.SelectListAll(1);
+-- CALL to_do_list.SelectListAll(0);
 
 DROP PROCEDURE IF EXISTS to_do_list.SelectList;
 
