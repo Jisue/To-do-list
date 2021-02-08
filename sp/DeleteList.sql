@@ -1,6 +1,4 @@
 -- 영구 삭제
-
--- 새로운 할일 추가
 -- CALL to_do_list.DeleteList(0);
 
 DROP PROCEDURE IF EXISTS to_do_list.DeleteList;

@@ -15,20 +15,22 @@ export class addRoutes {
             let newDate:Date = new Date();
             let time:String = newDate.toJSON().slice(0,10);
 
-            connection.query(`INSERT INTO user_list(list_name, list_dday, list_memo) 
-            VALUES('${req.body.list_name}','${req.body.list_date}','${req.body.list_memo}')`
-            , function (err, result, fields) {
+            let sql1 = `CALL to_do_list.InsertList('${req.body.list_name}','${req.body.list_date}','${req.body.list_memo}')`;
+
+            connection.query(sql1,function (err, result, fields) {
                 if (err) throw err;              
             });
             console.log("목록 추가됨");
                 
             console.log(req.body);
+
+            let sql2 = `CALL SelectListAll()`;
             
-            connection.query("SELECT * FROM user_list", function (err, result) {
+            connection.query(sql2, function (err, result) {
                 if (err) throw err;
                 //console.log(result);
                 res.render('list',{
-                    list : result,
+                    list : result[0],
                     time : time
                 });        
             });

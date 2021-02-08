@@ -7,16 +7,19 @@ const connection = new DB().connection;
 
 export class trashRoutes {   
 
-    public routes(router:any): void {          
+    public routes(router:any): void {  
+               
         router.route('/trash').get((req: Request, res: Response) => {
             
-            connection.query("SELECT * FROM user_list WHERE list_on = 0", function (err, result) {
+            let sql1 = `CALL SelectTrash()`;
+            connection.query(sql1, function (err, result) {
                 if (err) throw err;
                 res.render('trash',{
-                    list : result
+                    list : result[0]
                 });        
             });
         })
+
         router.route('/trash').post((req: Request, res: Response) => {
 
             let delete_index:JSON = req.body.delete_index;
@@ -24,14 +27,11 @@ export class trashRoutes {
 
             if(delete_index !== undefined)
             {
-                connection.query(`
-                    DELETE FROM user_list
-                    WHERE list_index = '${delete_index}';`
-                , function (err, result, fields) {
-                    if (err) throw err;              
+                let sql2 = `CALL DeleteList('${delete_index}')`;
+                connection.query(sql2, function (err, result) {
+                    if (err) throw err; 
                 });
                 console.log("영구삭제 되었습니다.");
-
             }
 
             let restore_index:JSON = req.body.restore_index;
@@ -39,22 +39,21 @@ export class trashRoutes {
             
             if(restore_index !== undefined)
             {
-                connection.query(`
-                    UPDATE user_list
-                    SET list_on = 1
-                    WHERE list_index = '${restore_index}';`
-                , function (err, result, fields) {
-                    if (err) throw err;              
+                let sql3 = `CALL UpdateTrashOn('${restore_index}')`;
+                connection.query(sql3, function (err, result) {
+                    if (err) throw err; 
                 });
                 console.log("복원 되었습니다.");
 
             }
             
-            connection.query("SELECT * FROM user_list", function (err, result) {
+            let sql4 = `CALL to_do_list.SelectListAll()`;
+            
+            connection.query(sql4, function (err, result) {
                 if (err) throw err;
                 //console.log(result);
                 res.render('trash',{
-                    list : result
+                    list : result[0]
                 });        
             });
         })

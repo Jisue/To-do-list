@@ -10,15 +10,13 @@ export class completeRoutes {
     public routes(router:any): void {          
 
         router.route('/complete').post((req: Request, res: Response) => {    
-            
-            connection.query( ` 
-                UPDATE user_list
-                SET list_name = '${req.body.list_name}', list_dday = '${req.body.list_date}', list_memo = '${req.body.list_memo}'
-                WHERE list_index = '${req.body.list_index}'`
-            , function (err, result) {
-                if (err) throw err;
-                
+
+            let sql1 = `CALL to_do_list.UpdateList('${req.body.list_index}','${req.body.list_name}','${req.body.list_date}','${req.body.list_memo}')`;
+
+            connection.query(sql1,function (err, result, fields) {
+                if (err) throw err;              
             });
+            
             console.log("목록 수정됨");
             res.render('complete');                
         })

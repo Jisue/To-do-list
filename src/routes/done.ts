@@ -17,21 +17,21 @@ export class doneRoutes {
             let done_index:JSON = req.body.done_index;
             console.log(done_index);
 
-            connection.query(`
-            UPDATE user_list
-            SET list_status = 'Done'
-            WHERE list_index = '${done_index}';`
-            , function (err, result, fields) {
+            let sql1 = `CALL UpdateStatusDone('${done_index}')`;
+
+            connection.query(sql1,function (err, result, fields) {
                 if (err) throw err;              
             });
 
             console.log("완료 처리됨");
 
-            connection.query("SELECT * FROM user_list", function (err, result) {
+            let sql2 = `CALL SelectListAll()`;
+            
+            connection.query(sql2, function (err, result) {
                 if (err) throw err;
                 //console.log(result);
                 res.render('list',{
-                    list : result,
+                    list : result[0],
                     time : time
                 });        
             });
