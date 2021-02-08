@@ -119,6 +119,7 @@ DELIMITER ;
 
 ```
     - DELIMITER : 문법의 끝을 나타내는 역할, 구문 문자
+- query문들을 Call Procedure로 변경
 
 ## 보완할 내역들
 - api서버를 만들고 ( 디비를 분리 해서 )
