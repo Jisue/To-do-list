@@ -1,4 +1,4 @@
-import {Request, Response} from 'express';
+import {Request, Response,Router} from 'express';
 import {DB} from '../config/db';
 
 
@@ -7,7 +7,7 @@ const connection = new DB().connection;
 
 export class doneRoutes {   
 
-    public routes(router:any): void {          
+    public routes(router:Router): void {          
         //목록 완료
         router.route('/done').post((req: Request, res: Response) => {
 

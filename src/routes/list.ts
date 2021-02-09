@@ -1,11 +1,11 @@
-import {Request, Response} from 'express';
+import {Request, Response, Router} from 'express';
 import {DB} from '../config/db';
 
 const connection = new DB().connection;
 
 export class listRoutes {   
 
-    public routes(router:any): void {          
+    public routes(router:Router): void {          
         router.route('/').get((req: Request, res: Response) => {     
             
             let newDate:Date = new Date();
