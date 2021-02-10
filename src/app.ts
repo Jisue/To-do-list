@@ -9,7 +9,6 @@ import {doneRoutes} from './routes/done';
 import {trashRoutes} from './routes/trash';
 import dotenv from 'dotenv';
 
-
 class App{
 
   public app : express.Application;
