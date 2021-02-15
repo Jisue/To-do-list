@@ -37,5 +37,25 @@ export class doneRoutes {
             });
         })
 
+        // router.route('/done').post((reqs: Request, ress: Response) => {  
+            
+        //     let newDate:Date = new Date();
+        //     let time:String = newDate.toJSON().slice(0,10);  
+
+        //     request(api('/todos'), {
+        //         method: 'POST',
+        //         json : true,
+        //         qs: {
+        //             list_name : reqs.body.list_name,
+        //             list_date : reqs.body.list_date,
+        //             list_memo : reqs.body.list_memo
+        //         }}, (error, res, body) => {
+        //         ress.render('list',{
+        //             list : body[0],
+        //             time : time,
+        //         }); 
+        //     });
+        // })
+
     }
 }
