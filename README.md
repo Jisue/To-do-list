@@ -4,6 +4,7 @@
 1. 환경 : Nodejs(express) + typescript + MySQL
 2. 기능 : 목록, 추가, 삭제, 기한에 따른 표시 ( 완료, 실패 )
     추가된 기능 : 수정, 오늘의 할일 조회
+3. API서버 : https://github.com/Jisue/To-do-list-api
 
 # 실행
 
