@@ -1,13 +1,18 @@
-import {Request, Response, Router} from 'express';
+import {Request, Response,Router} from 'express';
 import {DB} from '../config/db';
-
+import {Api} from '../api/api';
+import request from 'request';
 
 
 const connection = new DB().connection;
 
+const api = new Api().api;
+
+
 export class deleteRoutes {   
 
-    public routes(router:Router): void {          
+    public routes(router:Router): void {   
+        
         router.route('/delete').post((req: Request, res: Response) => {
 
             let newDate:Date = new Date();
@@ -16,23 +21,16 @@ export class deleteRoutes {
             let delete_index:JSON = req.body.delete_index;
             console.log(delete_index);
 
-            let sql1 = `CALL to_do_list.UpdateTrashOff('${delete_index}')`;
-
-            connection.query(sql1,function (err, result, fields) {
-                if (err) throw err;              
+            request(api('/todos/'+delete_index), {method: 'DELETE', json: true}, (error, response, body) => {
+                if (error) throw error;
+                console.log("휴지통으로 이동됨");
             });
-            
-            console.log("휴지통으로 이동됨");
-            
-            let sql2 = `CALL to_do_list.SelectListAll()`;
-            
-            connection.query(sql2, function (err, result) {
-                if (err) throw err;
-                //console.log(result);
+            request(api('/todos'), {method: 'GET', json: true}, (error, response, body) => {
+                if (error) throw error;
                 res.render('list',{
-                    list : result[0],
-                    time : time
-                });        
+                    list : body[0],
+                    time : time,
+                }); 
             });
         })
     }

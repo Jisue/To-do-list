@@ -24,7 +24,7 @@ export class addRoutes {
                     list_name : req.body.list_name,
                     list_date : req.body.list_date,
                     list_memo : req.body.list_memo
-                }}, (body) => {
+                }}, (error, response, body) => {
                     res.render('list',{
                     list : body[0],
                     time : time,

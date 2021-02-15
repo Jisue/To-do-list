@@ -1,9 +1,12 @@
-import {Request, Response, Router} from 'express';
+import {Request, Response,Router} from 'express';
 import {DB} from '../config/db';
-
+import {Api} from '../api/api';
+import request from 'request';
 
 
 const connection = new DB().connection;
+
+const api = new Api().api;
 
 export class completeRoutes {   
 
@@ -11,14 +14,18 @@ export class completeRoutes {
 
         router.route('/complete').post((req: Request, res: Response) => {    
 
-            let sql1 = `CALL to_do_list.UpdateList('${req.body.list_index}','${req.body.list_name}','${req.body.list_date}','${req.body.list_memo}')`;
-
-            connection.query(sql1,function (err, result, fields) {
-                if (err) throw err;              
-            });
-            
-            console.log("목록 수정됨");
-            res.render('complete');                
+            request(api('/todos/'+req.body.list_index), {
+                method: 'PUT',
+                json : true,
+                qs: {
+                    status : 'Edit',
+                    list_name : req.body.list_name,
+                    list_date : req.body.list_date,
+                    list_memo : req.body.list_memo
+                }}, (error, response, body) => {
+                    console.log("목록 수정됨");
+                    res.render('complete');
+            });            
         })
 
     }

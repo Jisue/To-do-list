@@ -1,10 +1,12 @@
-import {Request, Response, Router} from 'express';
+import {Request, Response,Router} from 'express';
 import {DB} from '../config/db';
-
+import {Api} from '../api/api';
+import request from 'request';
 
 
 const connection = new DB().connection;
 
+const api = new Api().api;
 export class editRoutes {   
 
     public routes(router:Router): void {          
@@ -15,16 +17,13 @@ export class editRoutes {
             let edit_index:JSON = req.body.edit_index;
             console.log(edit_index);
 
-            let sql1 = `CALL SelectList('${edit_index}')`;
-
-            connection.query(sql1,function (err, result) {
-                if (err) throw err;   
-                console.log(result);
-                let time:String = result[0][0].list_dday;
+            request(api('/todos/'+edit_index), {method: 'GET', json: true}, (error, response, body) => {
+                if (error) throw error;
+                let time:String = body[0][0].list_dday;
                 res.render('edit',{
-                    list : result[0],
+                    list : body[0],
                     time : time
-                });  
+                }); 
             });
         })
     }

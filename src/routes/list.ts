@@ -17,11 +17,16 @@ export class listRoutes {
             let newDate:Date = new Date();
             let time:String = newDate.toJSON().slice(0,10);  
 
-            request(api('/todos'), {method: 'GET', json: true}, (body) => {
+            request(api('/todos'), {method: 'GET', json: true}, (error, response, body) => {
                 for(let i:number = 0; i < body[0].length;i++){
                     if(body[0][i].list_dday < time && body[0][i].list_status === 'Doing'){
-
-                        request(api('/todos/'+body[0][i].list_index+'/failed'), {method: 'PUT', json: true}, (error, res, body) => {
+                        request(api('/todos/'+body[0][i].list_index), {
+                            method: 'PUT', 
+                            json: true,
+                            qs: {
+                                status : 'Failed'
+                            }
+                        }, (error, response, body) => {
                             if (error) throw error;
                         });
                     }
