@@ -129,17 +129,24 @@ DELIMITER ;
 - get : 
     - /todos	        : 프론트 파일을 제공, 전체 목록을 불러옴
     - /trashs	        : 휴지통 불러옴
-    - /edited 	        : 수정 완료 페이지
-    - /editing          : 수정 페이지 불러옴
     - /todos/:id        : id값으로 특정 todo를 찾음
 - post
     - /todos	        : list 목록을 추가
 - put
     - /todos/:id        : id값으로 특정 list 수정
-    - /todos/:id/status : 상태 수정
-    - /todos/:id/on     : 목록 on off 수정
-    - /trashs/:id       : id 값으로 특정 휴지통 리스트 수정
-    - /trashs/:id/on    : id 값으로 목록 복구
+        - status : Edit === 목록 값 수정
+        - status : Failed === 실패 처리
+        - status : Done === 완료 처리
+    - /trashs/:id       : id 값으로 특정 리스트 복구
 - delete
     - /todos/:id        : id값으로 특정 list 제거
+    - /trashs/:id       : id값으로 특정 list 영구삭제
 ```
+
+## 2021-02-14
+
+- API 모듈을 만들어서 API서버 연결 간편화
+
+## 추가로 할 일
+
+- 비동기 방식으로 api처리
