@@ -17,18 +17,15 @@ export class listRoutes {
             let newDate:Date = new Date();
             let time:String = newDate.toJSON().slice(0,10);  
 
-            request(api('/todos'), {json: true}, (error, res, body) => {
+            request(api('/todos'), {method: 'GET', json: true}, (error, res, body) => {
                 for(let i:number = 0; i < body[0].length;i++){
-                    // if(body[0][i].list_dday < time && body[0][i].list_status === 'Doing'){
+                    if(body[0][i].list_dday < time && body[0][i].list_status === 'Doing'){
 
-                    //     let sql2 = `CALL UpdateStatusFailed(${body[0][i].list_index});`;
-                    //     connection.query(sql2,function (err, result, fields) {
-                    //         if (err) throw err;              
-                    //     });
-                    // }
+                        request(api('/todos/'+body[0][i].list_index+'/failed'), {method: 'PUT', json: true}, (error, res, body) => {
+                            if (error) throw error;
+                        });
+                    }
                 }
-
-                console.log(body[0]);
                 ress.render('list',{
                     list : body[0],
                     time : time,
