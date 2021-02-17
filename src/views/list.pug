@@ -25,6 +25,8 @@ head
     .list {
       margin-top: 10%;
     }
+    @import url(https://fonts.googleapis.com/css?family=Lato:400,300);
+
 header
   nav.navbar.navbar-expand-md.navbar-dark.fixed-top.bg-dark
     .container
@@ -57,6 +59,9 @@ main.list
           br
           input.form-control(type='text', placeholder='내용', name='list_memo')
           br
+          h2.fw-light Color Picker
+            input(type="color" name="list_color" value="#9bbdfd" style='margin-left:10%')
+          br
           button.btn.btn-primary(type='button', onclick="javascript:add_btn()") Add
 
   br#List
@@ -68,7 +73,7 @@ main.list
           if list[i].list_on !== 0 && list[i].list_dday === time && list[i].list_status === 'Doing'
             .col
               .card.shadow-sm
-                .card-body
+                .card-body(style='background-color:'+list[i].list_color)
                   h3 #{list[i].list_name}
                   small.text-muted D-Day : #{list[i].list_dday}
                   br
@@ -93,7 +98,7 @@ main.list
           if list[i].list_on !== 0 && list[i].list_status === 'Doing' && list[i].list_dday > time
             .col
               .card.shadow-sm
-                .card-body
+                .card-body(style='background-color:'+list[i].list_color)
                   h3 #{list[i].list_name}
                   small.text-muted D-Day : #{list[i].list_dday}
                   br
@@ -118,7 +123,7 @@ main.list
           if list[i].list_on != 0 && list[i].list_status === 'Done'
             .col
               .card.shadow-sm
-                .card-body
+                .card-body(style='background-color:'+list[i].list_color)
                   h3 #{list[i].list_name}
                   small.text-muted D-Day : #{list[i].list_dday}
                   br
@@ -144,7 +149,7 @@ main.list
           if list[i].list_on != 0 && list[i].list_status === 'Failed'
             .col
               .card.shadow-sm
-                .card-body
+                .card-body(style='background-color:'+list[i].list_color)
                   h3 #{list[i].list_name}
                   small.text-muted D-Day : #{list[i].list_dday}
                   br

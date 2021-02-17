@@ -52,7 +52,7 @@ main.list
           if list[i].list_on === 0
             .col
               .card.shadow-sm
-                .card-body
+                .card-body(style='background-color:'+list[i].list_color)
                   h3 #{list[i].list_name}
                   small.text-muted D-Day : #{list[i].list_dday}
                   br

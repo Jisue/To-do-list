@@ -21,7 +21,8 @@ export class completeRoutes {
                     status : 'Edit',
                     list_name : req.body.list_name,
                     list_date : req.body.list_date,
-                    list_memo : req.body.list_memo
+                    list_memo : req.body.list_memo,
+                    list_color : req.body.list_color
                 }}, (error, response, body) => {
                     console.log("목록 수정됨");
                     res.render('complete');

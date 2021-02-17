@@ -35,6 +35,9 @@ export class listRoutes {
                 res.render('list',{
                     list : body[0],
                     time : time,
+                    list_color1: '#f88787',
+                    list_color2: '#9bbdfd',
+                    list_color3: '#a8ffe2',
                 }); 
             });
         })
