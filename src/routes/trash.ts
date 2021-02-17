@@ -27,26 +27,34 @@ export class trashRoutes {
             
             if(restore_index !== undefined)
             {
-                request(api('/trashs/'+restore_index), {method: 'PUT', json: true}, (error, response, body) => {});
+                request(api('/trashs/'+restore_index), {method: 'PUT', json: true}, (error, response, body) => {
+                    res.render('trash',{
+                        list : body[0]
+                    }); 
+                });
                 console.log(restore_index);
                 console.log("복원 되었습니다.");
-
             }
 
             let delete_index:JSON = req.body.delete_index;
 
             if(delete_index !== undefined)
             {
-                request(api('/trashs/'+delete_index), {method: 'DELETE', json: true}, (error, response, body) => {});
+                request(api('/trashs/'+delete_index), {method: 'DELETE', json: true}, (error, response, body) => {
+                    res.render('trash',{
+                        list : body[0]
+                    }); 
+                });
                 console.log(delete_index);
                 console.log("영구삭제 되었습니다.");
             }
 
-            request(api('/trashs'), {method: 'GET', json: true}, (error, response, body) => {
-                res.render('trash',{
-                    list : body[0]
-                }); 
-            });
+            // request(api('/trashs'), {method: 'GET', json: true}, (error, response, body) => {
+            //     console.log("재렌더링");
+            //     res.render('trash',{
+            //         list : body[0]
+            //     }); 
+            // });
 
         })
     }

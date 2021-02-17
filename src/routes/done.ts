@@ -22,16 +22,17 @@ export class doneRoutes {
 
             request(api('/todos/'+done_index), {method: 'PUT', json: true,
             qs: {
+                list_index : req.body.done_index,
                 status : 'Done'
             }}, (error, response, body) => {
                 if (error) throw error;
-            });
-            request(api('/todos'), {method: 'GET', json: true}, (error, response, body) => {
-                if (error) throw error;
-                res.render('list',{
-                    list : body[0],
-                    time : time,
-                }); 
+                request(api('/todos'), {method: 'GET', json: true}, (error, response, body) => {
+                    if (error) throw error;
+                    res.render('list',{
+                        list : body[0],
+                        time : time,
+                    }); 
+                });
             });
         })
     }

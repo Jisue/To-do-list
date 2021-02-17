@@ -24,6 +24,7 @@ export class listRoutes {
                             method: 'PUT', 
                             json: true,
                             qs: {
+                                list_index : body[0][i].list_index,
                                 status : 'Failed'
                             }
                         }, (error, response, body) => {

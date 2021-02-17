@@ -24,13 +24,13 @@ export class deleteRoutes {
             request(api('/todos/'+delete_index), {method: 'DELETE', json: true}, (error, response, body) => {
                 if (error) throw error;
                 console.log("휴지통으로 이동됨");
-            });
-            request(api('/todos'), {method: 'GET', json: true}, (error, response, body) => {
-                if (error) throw error;
-                res.render('list',{
-                    list : body[0],
-                    time : time,
-                }); 
+                request(api('/todos'), {method: 'GET', json: true}, (error, response, body) => {
+                    if (error) throw error;
+                    res.render('list',{
+                        list : body[0],
+                        time : time,
+                    }); 
+                });
             });
         })
     }
