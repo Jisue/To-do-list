@@ -153,8 +153,9 @@ DELIMITER ;
     - 비동기 식으로 진행시키기 위해 
 - 색상 설정을 위한 sp 변경
     - 메모 추가, 수정시 원하는 메모지 색 선택 가능
+- axios 사용
+    - async/await를 추가해서 비동기로 처리
 
 
 ### 추가로 할일
-- async/await, axios, fetch 사용해보기
 - 검색 기능 추가
