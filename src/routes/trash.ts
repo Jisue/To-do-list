@@ -14,7 +14,7 @@ export class trashRoutes {
                
         router.route('/trash').get((req: Request, res: Response) => {
 
-            request(api('/trashs'), {method: 'GET', json: true}, (error, response, body) => {
+            request(api('/trashs'), {method: 'GET', json: true}, (error:Error, response, body) => {
                 res.render('trash',{
                     list : body[0]
                 }); 
@@ -27,7 +27,7 @@ export class trashRoutes {
             
             if(restore_index !== undefined)
             {
-                request(api('/trashs/'+restore_index), {method: 'PUT', json: true}, (error, response, body) => {
+                request(api('/trashs/'+restore_index), {method: 'PUT', json: true}, (error:Error, response, body) => {
                     res.render('trash',{
                         list : body[0]
                     }); 
@@ -40,7 +40,7 @@ export class trashRoutes {
 
             if(delete_index !== undefined)
             {
-                request(api('/trashs/'+delete_index), {method: 'DELETE', json: true}, (error, response, body) => {
+                request(api('/trashs/'+delete_index), {method: 'DELETE', json: true}, (error:Error, response, body) => {
                     res.render('trash',{
                         list : body[0]
                     }); 

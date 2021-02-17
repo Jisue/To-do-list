@@ -26,7 +26,7 @@ export class doneRoutes {
                 status : 'Done'
             }}, (error, response, body) => {
                 if (error) throw error;
-                request(api('/todos'), {method: 'GET', json: true}, (error, response, body) => {
+                request(api('/todos'), {method: 'GET', json: true}, (error:Error, response, body) => {
                     if (error) throw error;
                     res.render('list',{
                         list : body[0],

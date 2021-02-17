@@ -21,7 +21,7 @@ export class deleteRoutes {
             let delete_index:JSON = req.body.delete_index;
             console.log(delete_index);
 
-            request(api('/todos/'+delete_index), {method: 'DELETE', json: true}, (error, response, body) => {
+            request(api('/todos/'+delete_index), {method: 'DELETE', json: true}, (error:Error, response, body) => {
                 if (error) throw error;
                 console.log("휴지통으로 이동됨");
                 request(api('/todos'), {method: 'GET', json: true}, (error, response, body) => {

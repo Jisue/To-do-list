@@ -17,7 +17,7 @@ export class editRoutes {
             let edit_index:JSON = req.body.edit_index;
             console.log(edit_index);
 
-            request(api('/todos/'+edit_index), {method: 'GET', json: true}, (error, response, body) => {
+            request(api('/todos/'+edit_index), {method: 'GET', json: true}, (error:Error, response, body) => {
                 if (error) throw error;
                 let time:String = body[0][0].list_dday;
                 res.render('edit',{
