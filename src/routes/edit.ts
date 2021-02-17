@@ -1,8 +1,7 @@
 import {Request, Response,Router} from 'express';
 import {DB} from '../config/db';
 import {Api} from '../api/api';
-import request from 'request';
-
+import axios from 'axios';
 
 const connection = new DB().connection;
 
@@ -17,14 +16,20 @@ export class editRoutes {
             let edit_index:JSON = req.body.edit_index;
             console.log(edit_index);
 
-            request(api('/todos/'+edit_index), {method: 'GET', json: true}, (error:Error, response, body) => {
-                if (error) throw error;
-                let time:String = body[0][0].list_dday;
-                res.render('edit',{
-                    list : body[0],
-                    time : time
-                }); 
-            });
+            const editRequest = async () => {
+                try {
+                    const response = await axios.get(api('/todos/'+edit_index));
+                    let time:String = response.data[0][0].list_dday;
+                    res.render('edit', {
+                        list: response.data[0],
+                        time: time,
+                    });
+                } catch (err) {
+                    // Handle Error Here
+                    console.error(err);
+                }
+            };
+            editRequest();
         })
     }
 }

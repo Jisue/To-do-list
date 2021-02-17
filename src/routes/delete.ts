@@ -1,7 +1,7 @@
-import {Request, Response,Router} from 'express';
-import {DB} from '../config/db';
-import {Api} from '../api/api';
-import request from 'request';
+import { Request, response, Response, Router } from 'express';
+import { DB } from '../config/db';
+import { Api } from '../api/api';
+import axios from 'axios';
 
 
 const connection = new DB().connection;
@@ -9,29 +9,34 @@ const connection = new DB().connection;
 const api = new Api().api;
 
 
-export class deleteRoutes {   
+export class deleteRoutes {
 
-    public routes(router:Router): void {   
-        
+    public routes(router: Router): void {
+
         router.route('/delete').post((req: Request, res: Response) => {
 
-            let newDate:Date = new Date();
-            let time:String = newDate.toJSON().slice(0,10);
+            let newDate: Date = new Date();
+            let time: String = newDate.toJSON().slice(0, 10);
 
-            let delete_index:JSON = req.body.delete_index;
+            let delete_index: JSON = req.body.delete_index;
             console.log(delete_index);
 
-            request(api('/todos/'+delete_index), {method: 'DELETE', json: true}, (error:Error, response, body) => {
-                if (error) throw error;
-                console.log("휴지통으로 이동됨");
-                request(api('/todos'), {method: 'GET', json: true}, (error, response, body) => {
-                    if (error) throw error;
-                    res.render('list',{
-                        list : body[0],
-                        time : time,
-                    }); 
-                });
-            });
+            const sendTrashRequest = async () => {
+                try {
+                    const response1 = await axios.delete(api('/todos/' + delete_index));
+                    const response2 = await axios.get(api('/todos'));
+                    console.log(response2.data);
+                    res.render('list', {
+                        list: response2.data[0],
+                        time: time,
+                    });
+                } catch (err) {
+                    // Handle Error Here
+                    console.error(err);
+                }
+            };
+            sendTrashRequest();
+            
         })
     }
 }

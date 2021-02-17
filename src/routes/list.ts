@@ -17,7 +17,7 @@ export class listRoutes {
             let newDate:Date = new Date();
             let time:String = newDate.toJSON().slice(0,10);  
 
-            request(api('/todos'), {method: 'GET', json: true}, (error: Error, response, body) => {
+            request(api('/todos'), {method: 'GET', json: true}, (error, response, body) => {
                 for(let i:number = 0; i < body[0].length;i++){
                     if(body[0][i].list_dday < time && body[0][i].list_status === 'Doing'){
                         request(api('/todos/'+body[0][i].list_index), {
@@ -35,9 +35,6 @@ export class listRoutes {
                 res.render('list',{
                     list : body[0],
                     time : time,
-                    list_color1: '#f88787',
-                    list_color2: '#9bbdfd',
-                    list_color3: '#a8ffe2',
                 }); 
             });
         })
