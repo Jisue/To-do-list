@@ -1,7 +1,7 @@
 import {Request, Response, Router} from 'express';
 import {DB} from '../config/db';
 import {Api} from '../api/api';
-import request from 'request';
+import axios from 'axios';
 
 
 const connection = new DB().connection;
@@ -17,26 +17,32 @@ export class listRoutes {
             let newDate:Date = new Date();
             let time:String = newDate.toJSON().slice(0,10);  
 
-            request(api('/todos'), {method: 'GET', json: true}, (error, response, body) => {
-                for(let i:number = 0; i < body[0].length;i++){
-                    if(body[0][i].list_dday < time && body[0][i].list_status === 'Doing'){
-                        request(api('/todos/'+body[0][i].list_index), {
-                            method: 'PUT', 
-                            json: true,
-                            qs: {
-                                list_index : body[0][i].list_index,
-                                status : 'Failed'
-                            }
-                        }, (error, response, body) => {
-                            if (error) throw error;
-                        });
+            const indexRequest = async () => {
+                try {
+                    const response1 = await axios.get(api('/todos'));
+                    for(let i:number = 0; i < response1.data[0].length;i++){
+                        if(response1.data[0][i].list_dday < time && response1.data[0][i].list_status === 'Doing'){
+                            const response2 = await axios({
+                                method: 'put',
+                                url: api('/todos/'+response1.data[0][i].list_index),
+                                params: {
+                                    list_index : response1.data[0][i].list_index,
+                                    status : 'Failed'
+                                }
+                            })
+                        }
                     }
+                    const response3 = await axios.get(api('/todos'));
+                    res.render('list',{
+                        list : response3.data[0],
+                        time : time,
+                    });
+                } catch (err) {
+                    // Handle Error Here
+                    console.error(err);
                 }
-                res.render('list',{
-                    list : body[0],
-                    time : time,
-                }); 
-            });
+            };
+            indexRequest();
         })
     }
 }

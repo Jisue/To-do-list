@@ -15,48 +15,65 @@ export class trashRoutes {
                
         router.route('/trash').get((req: Request, res: Response) => {
 
-            request(api('/trashs'), {method: 'GET', json: true}, (error:Error, response, body) => {
-                res.render('trash',{
-                    list : body[0]
-                }); 
-            });
+            const getTrashRequest = async () => {
+                try {
+                    const response = await axios.get(api('/trashs'));
+                    res.render('trash', {
+                        list: response.data[0]
+                    });
+                } catch (err) {
+                    // Handle Error Here
+                    console.error(err);
+                }
+            };
+            getTrashRequest();
         })
 
         router.route('/trash').post((req: Request, res: Response) => {
 
             let restore_index:JSON = req.body.restore_index;
-            
+
             if(restore_index !== undefined)
             {
-                request(api('/trashs/'+restore_index), {method: 'PUT', json: true}, (error:Error, response, body) => {
-                    res.render('trash',{
-                        list : body[0]
-                    }); 
-                });
+                const restoreTrashRequest = async () => {
+                    try {
+                        const response1 = await axios.put(api('/trashs/'+restore_index));
+                        const response2 = await axios.get(api('/trashs'));
+                        res.render('trash', {
+                            list: response2.data[0]
+                        });
+                    } catch (err) {
+                        // Handle Error Here
+                        console.error(err);
+                    }
+                };
+                restoreTrashRequest();
                 console.log(restore_index);
                 console.log("복원 되었습니다.");
+                return;
             }
 
             let delete_index:JSON = req.body.delete_index;
 
             if(delete_index !== undefined)
             {
-                request(api('/trashs/'+delete_index), {method: 'DELETE', json: true}, (error:Error, response, body) => {
-                    res.render('trash',{
-                        list : body[0]
-                    }); 
-                });
+                const deleteTrashRequest = async () => {
+                    try {
+                        const response1 = await axios.delete(api('/trashs/'+delete_index));
+                        const response2 = await axios.get(api('/trashs'));
+                        res.render('trash', {
+                            list: response2.data[0]
+                        });
+                    } catch (err) {
+                        // Handle Error Here
+                        console.error(err);
+                    }
+                };
+                deleteTrashRequest();
                 console.log(delete_index);
                 console.log("영구삭제 되었습니다.");
+                return;
             }
-
-            // request(api('/trashs'), {method: 'GET', json: true}, (error, response, body) => {
-            //     console.log("재렌더링");
-            //     res.render('trash',{
-            //         list : body[0]
-            //     }); 
-            // });
-
         })
     }
 }

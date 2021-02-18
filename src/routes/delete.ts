@@ -21,11 +21,11 @@ export class deleteRoutes {
             let delete_index: JSON = req.body.delete_index;
             console.log(delete_index);
 
-            const sendTrashRequest = async () => {
+            const deleteRequest = async () => {
                 try {
                     const response1 = await axios.delete(api('/todos/' + delete_index));
                     const response2 = await axios.get(api('/todos'));
-                    console.log(response2.data);
+                    //console.log(response2.data);
                     res.render('list', {
                         list: response2.data[0],
                         time: time,
@@ -35,7 +35,7 @@ export class deleteRoutes {
                     console.error(err);
                 }
             };
-            sendTrashRequest();
+            deleteRequest();
             
         })
     }
