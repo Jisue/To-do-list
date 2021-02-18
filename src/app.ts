@@ -9,6 +9,8 @@ import {doneRoutes} from './routes/done';
 import {trashRoutes} from './routes/trash';
 import dotenv from 'dotenv';
 
+import {selectRoutes} from './routes/select';
+
 class App{
 
   public app : express.Application;
@@ -20,6 +22,7 @@ class App{
   private doneroutes : doneRoutes = new doneRoutes();
   private trashroutes : trashRoutes = new trashRoutes();
 
+  private selectRoutes : selectRoutes = new selectRoutes();
 
   constructor(){
     this.app = express();
@@ -31,7 +34,8 @@ class App{
     this.addroute.routes(this.app); 
     this.deleteroute.routes(this.app); 
     this.doneroutes.routes(this.app); 
-    this.trashroutes.routes(this.app); 
+    this.trashroutes.routes(this.app);
+    this.selectRoutes.routes(this.app);
   }
 
 }

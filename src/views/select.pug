@@ -7,6 +7,7 @@ head
   meta(name='generator', content='Hugo 0.79.0')
   title To-Do-List &middot; Bootstrap v5.0
   link(rel='canonical', href='https://getbootstrap.com/docs/5.0/examples/album/')
+  link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
   // Bootstrap core CSS
   link(href='../assets/dist/css/bootstrap.min.css', rel='stylesheet')
   style.
@@ -25,6 +26,8 @@ head
     .list {
       margin-top: 10%;
     }
+    @import url(https://fonts.googleapis.com/css?family=Lato:400,300);
+
 header
   nav.navbar.navbar-expand-md.navbar-dark.fixed-top.bg-dark
     .container
@@ -35,27 +38,39 @@ header
       #navbarCollapse.collapse.navbar-collapse
         ul.navbar-nav.me-auto.mb-2.mb-md-0
           li.nav-item.active
-            a.nav-link(aria-current='page', href='/#Add') Add
+            a.nav-link(aria-current='page', href='#Add') Add
           li.nav-item
-            a.nav-link(href='/#List') List
+            a.nav-link(href='#List') List
           li.nav-item
-            a.nav-link(href='#Delete', tabindex='-1', aria-disabled='true') Delete
+            a.nav-link(href='/trash', tabindex='-1', aria-disabled='true') Delete
           li.nav-item
-            a.nav-link(href='/select', tabindex='-1', aria-disabled='true') Selete
+            a.nav-link(href='/select', tabindex='-1', aria-disabled='true') Selete          
 
 main.list
-  br#Delete
-  h2(style = 'margin : 5%') 휴지통
+  br#Add
+  section.py-5.text-center.container
+    .row.py-lg-5
+      .col-lg-6.col-md-8.mx-auto
+        h1.fw-light Select
+        p.lead.text-muted &#xC544;&#xB798; &#xBC84;&#xD2BC;&#xC744; &#xD074;&#xB9AD;&#xD574;&#xC11C; 검색하세요.
+        // 할일 등록
+        form#add_form(action='/add' method='post')
+          //onsubmit='return confirm("정말 추가하시겠습니까?")'
+          input.name.form-control(type='text', placeholder='제목', id = 'select', name='list_name', style='width : 90%;display:inline')
+          button.btn.btn-secondary(type='button',onclick="javascript:select_btn()", style='float:right;')
+            i.fa.fa-search
+
+  br#List
+  h2(style = 'margin : 5%') 검색된 할일
   .album.py-5.bg-light
     .container
       .row.row-cols-1.row-cols-sm-2.row-cols-md-3.g-3
-
         -for(let i = 0 ; i < list.length; i++)
-          if list[i].list_on === 0
-            .col
+          if list[i].list_on !== 0
+            .item.col
               .card.shadow-sm
                 .card-body(style='background-color:'+list[i].list_color)
-                  h3 #{list[i].list_name}
+                  h3.listName #{list[i].list_name}
                   small.text-muted D-Day : #{list[i].list_dday}
                   br
                   br
@@ -63,11 +78,12 @@ main.list
                   br
                   .d-flex.justify-content-between.align-items-center
                     .btn-group
+                      //수정
+                      button.btn.btn-sm.btn-outline-secondary(type='button', onclick="javascript:edit_name('"+list[i].list_index+"')") Edit
                       // 삭제
                       button.btn.btn-sm.btn-outline-secondary(type='button', onclick="javascript:send_name('"+list[i].list_index+"')") Delete
-                      // 복원
-                      button.btn.btn-sm.btn-outline-secondary(type='button', onclick="javascript:rollback_name('"+list[i].list_index+"')") Restore
                     small.text-muted #{list[i].list_status} &nbsp;&nbsp;
+                      button.btn.btn-sm.btn-outline-secondary(type='button', onclick="javascript:done_name('"+list[i].list_index+"')") &nbsp;&nbsp;&nbsp;
 
 footer.text-muted.py-5
 script(src='../assets/dist/js/bootstrap.bundle.min.js')
@@ -75,10 +91,10 @@ script(src='../assets/dist/js/bootstrap.bundle.min.js')
 // 삭제 데이터 전송
 script.
   function send_name(namedata) {
-    if (confirm("정말 삭제하시겠습니까??") === true){    //확인
+    if (confirm("휴지통으로 이동됩니다.") === true){    //확인
       var form = document.createElement("form");
       form.setAttribute("method", "post");
-      form.setAttribute("action", "/trash");
+      form.setAttribute("action", "/delete");
       var post = document.createElement("input");
       post.setAttribute("type", "hidden");
       post.setAttribute("name", "delete_index");
@@ -91,16 +107,14 @@ script.
     }
   }
 
-// 데이터 복구
-script.
-  function rollback_name(namedata) {
-    if (confirm("정말 복구하시겠습니까??") === true){    //확인
+  function done_name(namedata) {
+    if (confirm("정말 완료하겠습니까??") === true){    //확인
       var form = document.createElement("form");
       form.setAttribute("method", "post");
-      form.setAttribute("action", "/trash");
+      form.setAttribute("action", "/done");
       var post = document.createElement("input");
       post.setAttribute("type", "hidden");
-      post.setAttribute("name", "restore_index");
+      post.setAttribute("name", "done_index");
       post.setAttribute("value", namedata);
       form.appendChild(post);
       document.body.appendChild(form);
@@ -108,4 +122,40 @@ script.
     }else{   //취소
         return;
     }
+  }
+
+
+// 수정 데이터 전송
+script.
+  function edit_name(namedata) {
+    //- window.open("/edit", "a", "width=500, height=500, left=100, top=100");
+    var form = document.createElement("form");
+    form.setAttribute("method", "post");
+    form.setAttribute("action", "/edit");
+    var post = document.createElement("input");
+    post.setAttribute("type", "hidden");
+    post.setAttribute("name", "edit_index");
+    post.setAttribute("value", namedata);
+    form.appendChild(post);
+    document.body.appendChild(form);
+    form.submit();
+  }
+
+// add
+script.
+  function select_btn() {
+
+        let value, name, item, i;
+
+        value = document.getElementById("select").value.toUpperCase();
+        item = document.getElementsByClassName("item");
+
+        for(i=0;i<item.length;i++){
+          name = item[i].getElementsByClassName("listName");
+          if(name[0].innerHTML.toUpperCase().indexOf(value) > -1){
+            item[i].style.display = "block";
+          }else{
+            item[i].style.display = "none";
+          }
+        }
   }
