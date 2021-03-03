@@ -43,7 +43,7 @@
     "mysql": "^2.18.1",
     "mysql2": "^2.2.5",
     "path": "^0.12.7",
-    "pug": "^3.0.0",
+    "pug": "^3.0.1",
     "request": "^2.88.2",
     "url-search-params-polyfill": "^8.1.0"
   },
