@@ -34,12 +34,12 @@ main
           input(type='hidden', value = list[0].list_index, name='list_index')
           input.name.form-control(type='text', placeholder=list[0].list_name, name='list_name')
           br
-          input.form-control(type='date', value=time, name='list_date')
+          input.form-control(type='date', value=list[0].list_dday, name='list_date')
           br
           input.form-control(type='text', placeholder=list[0].list_memo, name='list_memo')
           br
           h2.fw-light Color Picker
-            input(type="color" name="list_color" value="#FFFFFF" style='margin-left:10%')
+            input(type="color" name="list_color" value=list[0].list_color style='margin-left:10%')
           br
           input.btn.btn-primary(type='submit', value="Edit" ,name='edit_btn', style='margin-right:2%')
           input.btn.btn-primary(type='button', value='Back', name='Back', style='margin-left:2%', onclick="location.href='/'")
